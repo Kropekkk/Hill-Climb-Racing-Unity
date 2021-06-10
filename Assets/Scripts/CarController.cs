@@ -6,23 +6,17 @@ public class CarController : MonoBehaviour
 {
     public Rigidbody2D backTire;
     public Rigidbody2D frontTire;
+    public Rigidbody2D Car;
 
     float movement;
-
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
     private void FixedUpdate()
-    {
-        movement = Input.GetAxis("Horizontal");
-        backTire.AddTorque(-movement * 100 * Time.fixedDeltaTime);
-        frontTire.AddTorque(-movement * 100 * Time.fixedDeltaTime);
+    {     
+        { 
+            movement = Input.GetAxis("Horizontal");
+            backTire.AddTorque(-movement * 100 * Time.fixedDeltaTime);
+            frontTire.AddTorque(-movement * 100 * Time.fixedDeltaTime);
+            Car.AddTorque(movement * 100 * Time.fixedDeltaTime);
+        }
     }
 }
