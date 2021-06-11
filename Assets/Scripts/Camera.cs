@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Camera : MonoBehaviour
 {
@@ -11,7 +9,6 @@ public class Camera : MonoBehaviour
     {
         offset = transform.position - car.position;
     }
-
     void Update()
     {
         transform.position = car.position+offset;

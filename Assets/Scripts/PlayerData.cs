@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class PlayerData
 {
-    public int best_distance;
-
-    public void SaveBestDistance()
+    public void SaveBestDistance(int best_distance)
     {
         PlayerPrefs.SetInt("BestDistance", best_distance);
     }
@@ -14,5 +12,12 @@ public class PlayerData
     {
         return PlayerPrefs.GetInt("BestDistance");
     }
-
+    public void SaveCoins(int coins)
+    {
+        PlayerPrefs.SetInt("Coins", coins);
+    }
+    public int GetCoins()
+    {
+        return PlayerPrefs.GetInt("Coins");
+    }
 }

@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
     public Rigidbody2D backTire;
     public Rigidbody2D frontTire;
     public Rigidbody2D Car;
+    private int TireTorque = 100;
+    private int CarBodyTorque = 150;
 
     float movement;
     
@@ -14,9 +14,9 @@ public class CarController : MonoBehaviour
     {     
         { 
             movement = Input.GetAxis("Horizontal");
-            backTire.AddTorque(-movement * 100 * Time.fixedDeltaTime);
-            frontTire.AddTorque(-movement * 100 * Time.fixedDeltaTime);
-            Car.AddTorque(movement * 100 * Time.fixedDeltaTime);
+            backTire.AddTorque(-movement * TireTorque * Time.fixedDeltaTime);
+            frontTire.AddTorque(-movement * TireTorque * Time.fixedDeltaTime);
+            Car.AddTorque(movement * CarBodyTorque * Time.fixedDeltaTime);
         }
     }
 }
