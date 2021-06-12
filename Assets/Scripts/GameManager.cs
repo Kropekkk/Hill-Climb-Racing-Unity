@@ -2,46 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public PlayerData MyData;
-    
-    public Slider Fuel_UILevel;
-
-    public float fuel_level=1;
-    float fuelconsumption = 0.01f;
-
-    public CarController MyCar;
-
+    public GameObject PausePanel;
+    public GameObject GameUI;
+    public GameObject EndPanel;
+    public Text EndCoins;
+    public Text Enddistance;
     public Text BestDistanceT;
     public Text CoinT;
+    public Slider Fuel_UILevel;
+
+    public CarController MyCar;
+    public PlayerData MyData;
+
+    public float fuel_level;
+    float fuelconsumption = 0.01f;
 
     public int currentdistance;
+    public int totalcoins;
     public int currentcoins;
     float spawnpoint;
 
-    public GameObject PausePanel;
-    public GameObject GameUI;
-
     void Start()
     {
+        fuel_level = 1;
         Time.timeScale = 1f;
         MyData = new PlayerData();
         BestDistanceT.text = MyData.GetBestDistance().ToString();
         spawnpoint = Mathf.Abs(MyCar.transform.position.x);
-        currentcoins = MyData.GetCoins();
+        totalcoins = MyData.GetCoins();
     }
 
-    void Update()
+    private void FixedUpdate()
     {
         FuelSystem();
         DistanceSystem();
         CoinSystem();
-    }
-    void EndGame()
-    {
-        
     }
     void FuelSystem()
     {
@@ -49,6 +48,10 @@ public class GameManager : MonoBehaviour
         {
             fuel_level -= fuelconsumption * Time.fixedDeltaTime;
             Fuel_UILevel.value = fuel_level;
+        }
+        else
+        {
+            EndGame();
         }
     }
     void DistanceSystem()
@@ -62,8 +65,8 @@ public class GameManager : MonoBehaviour
     }
     void CoinSystem()
     {
-        CoinT.text = currentcoins.ToString();
-        MyData.SaveCoins(currentcoins);
+        CoinT.text = totalcoins.ToString();
+        MyData.SaveCoins(totalcoins);
     }
     public void PauseGame()
     {
@@ -76,5 +79,22 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         PausePanel.SetActive(false);
         GameUI.SetActive(true);
+    }
+    public void EndGame()
+    {
+        GameUI.SetActive(false);
+        EndPanel.SetActive(true);
+        Time.timeScale = 0f;
+
+        EndCoins.text = "Earned coins: " + currentcoins.ToString();
+        Enddistance.text = "Distance: " + currentdistance.ToString();
+    }
+    public void GoBack()
+    {
+        SceneManager.LoadScene(0);
+    }
+    public void PlayAgain()
+    {
+        SceneManager.LoadScene(1);
     }
 }
