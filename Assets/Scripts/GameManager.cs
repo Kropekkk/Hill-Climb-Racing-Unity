@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -19,7 +17,7 @@ public class GameManager : MonoBehaviour
     public PlayerData MyData;
 
     public float fuel_level;
-    float fuelconsumption = 0.01f;
+    float fuelconsumption = 0.05f;
 
     public int currentdistance;
     public int totalcoins;
@@ -91,10 +89,10 @@ public class GameManager : MonoBehaviour
     }
     public void GoBack()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
     public void PlayAgain()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 }
