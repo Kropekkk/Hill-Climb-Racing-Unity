@@ -30,14 +30,13 @@ public class ThirdSceneManager : MonoBehaviour
     int currentcoins;
 
     void Start()
-    {
+    {        
         MyData = new PlayerData();
         currentcoins = MyData.GetCoins();
         Totalcoins.text = currentcoins.ToString();
         MapSelected.text = MyData.GetStageSelected();
         MyVehicle = new VehicleData();
-        GetData();
-        
+        GetData();      
     }
     public void PlayGame()
     {
@@ -49,16 +48,16 @@ public class ThirdSceneManager : MonoBehaviour
     }
     public void BuyEngine()
     {
-        if(currentcoins>=Engine_cost)
+        if(currentcoins>=Engine_cost && MyVehicle.EngineLevel<13)
         {
-            MyVehicle.SaveVehicleData(MyData.GetCurrentVehicle(), MyVehicle.EngineLevel + 1, MyVehicle.SuspensionLevel, MyVehicle.TiresLevel, MyVehicle.FourWDLevel);
+            MyVehicle.SaveVehicleData(MyData.GetCurrentVehicle(), MyVehicle.EngineLevel+1, MyVehicle.SuspensionLevel, MyVehicle.TiresLevel, MyVehicle.FourWDLevel);
             GetData();
             Buy(Engine_cost);                           
         }       
     }
     public void BuySuspension()
     {
-        if(currentcoins>=Suspension_cost)
+        if(currentcoins>=Suspension_cost && MyVehicle.SuspensionLevel<13)
         {
             MyVehicle.SaveVehicleData(MyData.GetCurrentVehicle(), MyVehicle.EngineLevel, MyVehicle.SuspensionLevel + 1, MyVehicle.TiresLevel, MyVehicle.FourWDLevel);
             GetData();
@@ -67,7 +66,7 @@ public class ThirdSceneManager : MonoBehaviour
     }
     public void BuyTires()
     {
-        if(currentcoins>=Tires_cost)
+        if(currentcoins>=Tires_cost && MyVehicle.TiresLevel<13)
         {
             MyVehicle.SaveVehicleData(MyData.GetCurrentVehicle(), MyVehicle.EngineLevel, MyVehicle.SuspensionLevel, MyVehicle.TiresLevel + 1, MyVehicle.FourWDLevel);
             GetData();
@@ -76,7 +75,7 @@ public class ThirdSceneManager : MonoBehaviour
     }
     public void Buy4WD()
     {
-        if(currentcoins>=FourWD_cost)
+        if(currentcoins>=FourWD_cost && MyVehicle.FourWDLevel<13)
         {
             MyVehicle.SaveVehicleData(MyData.GetCurrentVehicle(), MyVehicle.EngineLevel, MyVehicle.SuspensionLevel, MyVehicle.TiresLevel, MyVehicle.FourWDLevel + 1);
             GetData();
@@ -84,8 +83,7 @@ public class ThirdSceneManager : MonoBehaviour
         }      
     }
     void GetData()
-    {
-        
+    {     
         MyVehicle.GetVehicleData(MyData.GetCurrentVehicle());
 
         Engine_cost = 5000 + MyVehicle.EngineLevel * 2500;
@@ -93,11 +91,11 @@ public class ThirdSceneManager : MonoBehaviour
         Tires_cost = 5000 + MyVehicle.TiresLevel * 2500;
         FourWD_cost = 5000 + MyVehicle.FourWDLevel * 2500;
 
-        LevelEngine.text = "Level " + MyVehicle.EngineLevel  + " / " + "13";
+        LevelEngine.text = "Level " + MyVehicle.EngineLevel + " / " + "13";
         LevelSuspension.text = "Level " + MyVehicle.SuspensionLevel + " / " + "13";
         LevelTires.text = "Level " + MyVehicle.TiresLevel + " / " + "13";
-        Level4WD.text = "Level " + MyVehicle.FourWDLevel + " / " + "13";
-
+        Level4WD.text = "Level " + MyVehicle.FourWDLevel + " / " + "13";  
+                 
         CostEngine.text = "Cost " + (Engine_cost).ToString();
         CostSuspension.text = "Cost " +  (Suspension_cost).ToString();
         CostTires.text = "Cost " +  (Tires_cost).ToString();
