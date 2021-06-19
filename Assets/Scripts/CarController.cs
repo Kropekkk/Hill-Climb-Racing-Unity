@@ -7,6 +7,8 @@ public class CarController : MonoBehaviour
     public Rigidbody2D Car;
     private int TireTorque;
     private int CarBodyTorque;
+    public JointSuspension2D RearWheel,FrontWheel;
+    public WheelJoint2D Rear, Front;
 
     float movement;
 
@@ -17,6 +19,14 @@ public class CarController : MonoBehaviour
         MyVehicle.GetVehicleData(MyData.GetCurrentVehicle());
         TireTorque = 80 + MyVehicle.EngineLevel + MyVehicle.FourWDLevel + MyVehicle.TiresLevel;
         CarBodyTorque = 150 + MyVehicle.EngineLevel + MyVehicle.FourWDLevel;
+        RearWheel.dampingRatio = 0.7f + MyVehicle.SuspensionLevel*0.01f;
+        RearWheel.angle = 90;
+        RearWheel.frequency = 3;
+        FrontWheel.dampingRatio = 0.7f + MyVehicle.SuspensionLevel * 0.01f;
+        FrontWheel.angle = 90;
+        FrontWheel.frequency = 3;
+        Rear.suspension = RearWheel;
+        Front.suspension = FrontWheel;
     }
     private void FixedUpdate()
     {     
