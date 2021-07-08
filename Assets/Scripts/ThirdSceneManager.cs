@@ -50,36 +50,36 @@ public class ThirdSceneManager : MonoBehaviour
     {
         if(currentcoins>=Engine_cost && MyVehicle.EngineLevel<13)
         {
+            Buy(Engine_cost);
             MyVehicle.SaveVehicleData(MyData.GetCurrentVehicle(), MyVehicle.EngineLevel+1, MyVehicle.SuspensionLevel, MyVehicle.TiresLevel, MyVehicle.FourWDLevel);
-            GetData();
-            Buy(Engine_cost);                           
+            GetData();                           
         }       
     }
     public void BuySuspension()
     {
         if(currentcoins>=Suspension_cost && MyVehicle.SuspensionLevel<13)
         {
+            Buy(Suspension_cost);
             MyVehicle.SaveVehicleData(MyData.GetCurrentVehicle(), MyVehicle.EngineLevel, MyVehicle.SuspensionLevel + 1, MyVehicle.TiresLevel, MyVehicle.FourWDLevel);
             GetData();
-            Buy(Suspension_cost);
         }  
     }
     public void BuyTires()
     {
         if(currentcoins>=Tires_cost && MyVehicle.TiresLevel<13)
         {
-            MyVehicle.SaveVehicleData(MyData.GetCurrentVehicle(), MyVehicle.EngineLevel, MyVehicle.SuspensionLevel, MyVehicle.TiresLevel + 1, MyVehicle.FourWDLevel);
-            GetData();
             Buy(Tires_cost);
+            MyVehicle.SaveVehicleData(MyData.GetCurrentVehicle(), MyVehicle.EngineLevel, MyVehicle.SuspensionLevel, MyVehicle.TiresLevel + 1, MyVehicle.FourWDLevel);
+            GetData();  
         }       
     }
     public void Buy4WD()
     {
         if(currentcoins>=FourWD_cost && MyVehicle.FourWDLevel<13)
         {
-            MyVehicle.SaveVehicleData(MyData.GetCurrentVehicle(), MyVehicle.EngineLevel, MyVehicle.SuspensionLevel, MyVehicle.TiresLevel, MyVehicle.FourWDLevel + 1);
-            GetData();
             Buy(FourWD_cost);
+            MyVehicle.SaveVehicleData(MyData.GetCurrentVehicle(), MyVehicle.EngineLevel, MyVehicle.SuspensionLevel, MyVehicle.TiresLevel, MyVehicle.FourWDLevel + 1);
+            GetData();      
         }      
     }
     void GetData()
